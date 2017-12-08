@@ -2,7 +2,7 @@ package com.raids.ds.core.graph
 
 import scala.collection.mutable
 
-class Graph[T](directed:Boolean) {
+abstract class Graph[T](directed:Boolean) {
   private val nodes = collection.mutable.Set[T]()
   private val edges = collection.mutable.Map[T, collection.mutable.Set[T]]()
 
@@ -46,16 +46,14 @@ class Graph[T](directed:Boolean) {
     s"Number of nodes: $getNumberOfNodes,\n" +
     s"Nodes: $nodes,\n" +
     s"Edges: $edges"
-}
 
-object Graph extends App {
-  val graph = new Graph[Int](directed = false)
-  graph.addEdge(2, 4)
-  graph.addEdge(2, 6)
-  graph.addEdge(2, 8)
-  graph.addEdge(2, 10)
-  graph.addEdge(3, 6)
-  graph.addEdge(3, 9)
+  def transpose():Graph[T]
+  def complement(): Graph[T]
+  def lineGraph(): Graph[T]
+  def mirror(): Graph[T]
+  def powerGraph(): Graph[T]
+  def dualGraph(): Graph[T]
+  def medialGraph(): Graph[T]
+  def quotientGraph(): Graph[T]
 
-  println(graph)
 }
