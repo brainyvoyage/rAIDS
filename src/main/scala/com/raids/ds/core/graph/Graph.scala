@@ -1,11 +1,10 @@
 package com.raids.ds.core.graph
 
-import scala.collection.mutable
-
-abstract class Graph[T](directed:Boolean) {
-  private val nodes = collection.mutable.Set[T]()
-  private val edges = collection.mutable.Map[T, collection.mutable.Set[T]]()
-
+abstract class Graph[V, E](directed:Boolean) {
+  private val nodes = collection.mutable.Set[V]()
+  private val edges = collection.mutable.Map[V, collection.mutable.Set[E]]()
+}
+  /*
   private def addEdgeHelper(from:T, to:T): Unit = {
     val adjacencyList = edges.getOrElse(from, mutable.Set[T]{to})
     if (!adjacencyList.contains(to))
@@ -40,7 +39,7 @@ abstract class Graph[T](directed:Boolean) {
     edges.foreach(println)
   }
 
-  def isEmpty(): Boolean = nodes.isEmpty
+  def isEmpty: Boolean = nodes.isEmpty
 
   override def toString = s"Graph\nDirected: $isDirected,\n" +
     s"Number of nodes: $getNumberOfNodes,\n" +
@@ -57,3 +56,4 @@ abstract class Graph[T](directed:Boolean) {
   def quotientGraph(): Graph[T]
 
 }
+*/
