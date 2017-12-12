@@ -1,9 +1,13 @@
 package com.raids.ds.core.graph
+import com.raids.ds.core.graph.edge.Edge
 
-abstract class Graph[V, E](directed:Boolean) {
-  private val nodes = collection.mutable.Set[V]()
-  private val edges = collection.mutable.Map[V, collection.mutable.Set[E]]()
+abstract class Graph[T]{
+  def addVertex(vertex: Vertex[T])
+  def inDegree(vertex: Vertex[T])
+  def outDegree(vertex: Vertex[T])
 }
+
+//trait U
   /*
   private def addEdgeHelper(from:T, to:T): Unit = {
     val adjacencyList = edges.getOrElse(from, mutable.Set[T]{to})

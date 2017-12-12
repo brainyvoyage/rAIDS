@@ -1,6 +1,6 @@
 package com.raids.ds.core.graph.edge
 
-class DirectedEdge[T](val vertex1: T, val vertex2: T) extends Edge with Directed with Unweighted{
+class DirectedEdge[T](val vertex1: T, val vertex2: T) extends Edge[T] with Directed with Unweighted{
 
   override def toString: String = vertex1.toString +
     super[Unweighted].toString +
