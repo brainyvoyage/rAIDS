@@ -2,9 +2,9 @@ package com.raids.ds.core.graph
 import com.raids.ds.core.graph.edge.Edge
 
 abstract class Graph[T]{
-  def addVertex(vertex: Vertex[T])
-  def inDegree(vertex: Vertex[T])
-  def outDegree(vertex: Vertex[T])
+  def addVertex(vertex: Vertex[T]):Unit
+  def inDegree(vertex: Vertex[T]):Int
+  def outDegree(vertex: Vertex[T]):Int
 }
 
 //trait U
