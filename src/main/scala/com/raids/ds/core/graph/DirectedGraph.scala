@@ -2,7 +2,7 @@ package com.raids.ds.core.graph
 
 import java.util.NoSuchElementException
 
-import com.raids.ds.core.graph.edge.{DirectedEdge, Edge}
+import com.raids.ds.core.graph.edge.DirectedEdge
 
 import scala.collection.mutable
 
