@@ -7,15 +7,19 @@ import com.raids.ds.core.graph.edge.DirectedEdge
 import scala.collection.mutable
 
 class DirectedGraph[T] extends Graph[T] {
-  private[this] val vertices:mutable.Set[Vertex[T]] = mutable.Set[Vertex[T]]()
+  override val vertices:mutable.Set[Vertex[T]] = mutable.Set[Vertex[T]]()
 
-  private[this] val adjList:mutable.Map[
+  private val adjList:mutable.Map[
     Vertex[T], mutable.Set[DirectedEdge[T]]] = mutable.Map[Vertex[T], mutable.Set[DirectedEdge[T]]
     ]()
 
-  private[this] val vertexInDegree:mutable.Map[Vertex[T], Int] = mutable.Map[Vertex[T], Int]()
+  protected val vertexInDegree:mutable.Map[Vertex[T], Int] = mutable.Map[Vertex[T], Int]()
 
-  override def addVertex(vertex: Vertex[T]): Unit = {}
+  override def addVertex(vertex: Vertex[T]): Unit = {
+    if (!vertices.contains(vertex)) {
+      vertices += vertex
+    }
+  }
 
   @throws(classOf[NoSuchElementException])
   override def inDegree(vertex: Vertex[T]): Int = {

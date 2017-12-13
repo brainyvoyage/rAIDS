@@ -1,6 +1,5 @@
 package com.raids.ds.core.graph
 
-<<<<<<< HEAD
 trait States extends Enumeration {
   val visited: Value = Value("VISITED")
   val discovered: Value = Value("DISCOVERED")
