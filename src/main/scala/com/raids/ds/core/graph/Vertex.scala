@@ -1,13 +1,6 @@
 package com.raids.ds.core.graph
 
-trait States extends Enumeration {
-  val visited: Value = Value("VISITED")
-  val discovered: Value = Value("DISCOVERED")
-  val unDiscovered: Value = Value("UNDISCOVERED")
-}
-
-
-class Vertex[T](var data:T) extends States{
+class Vertex[T](val data:T) extends States {
   private[this] var _state:Value = unDiscovered
   private[this] var _discoveryTime:Int = 0
   private[this] var _finishingTime:Int = -1
@@ -20,11 +13,16 @@ class Vertex[T](var data:T) extends States{
   def discoveryTime_=(value: Int): Unit = _discoveryTime = value
 
   def finishingTime:Int = _finishingTime
+  @throws[IllegalArgumentException]
   def finishingTime_=(value: Int): Unit = {
     require(value >= _discoveryTime)
     _finishingTime = value
   }
 
   def predecessor:Vertex[T] = _predecessor
-  def predecessor_=(predecessor: Vertex[T]): Unit = _predecessor = predecessor
+  @throws[IllegalArgumentException]
+  def predecessor_=(that: Vertex[T]): Unit = {
+    require(that.discoveryTime < this._predecessor.discoveryTime)
+    _predecessor = that
+  }
 }
