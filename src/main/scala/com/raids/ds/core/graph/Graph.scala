@@ -5,6 +5,7 @@ abstract class Graph[T]{
   def addVertex(vertex: Vertex[T]):Unit
   def inDegree(vertex: Vertex[T]):Int
   def outDegree(vertex: Vertex[T]):Int
+  def contains(vertex: Vertex[T]):Boolean
 }
 
 //trait U

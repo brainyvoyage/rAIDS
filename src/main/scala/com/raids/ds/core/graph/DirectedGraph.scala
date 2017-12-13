@@ -50,4 +50,5 @@ class DirectedGraph[T] extends Graph[T] {
     adjList.put(edge.vertex1, neighbor)
   }
 
+  override def contains(vertex: Vertex[T]):Boolean = vertices.contains(vertex)
 }
