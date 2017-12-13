@@ -6,5 +6,4 @@ package object graph {
     val discovered: Value = Value("DISCOVERED")
     val unDiscovered: Value = Value("UNDISCOVERED")
   }
-
 }
