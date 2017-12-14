@@ -4,25 +4,55 @@ import java.util.NoSuchElementException
 
 import com.raids.ds.core.graph.edge.DirectedEdge
 
+import scala.language.higherKinds
 import scala.collection.mutable
 
-class DirectedGraph[T] extends Graph[T] {
-  override val vertices:mutable.Set[Vertex[T]] = mutable.Set[Vertex[T]]()
+class DirectedGraph[A[B]] extends Graph[A]{
+  private val adjList:mutable.Map[
+    Vertex[A[_]], mutable.Set[DirectedEdge[A[_]]]] = mutable.Map[Vertex[A[_]], mutable.Set[DirectedEdge[A[_]]]
+    ]()
+  protected val vertexInDegree:mutable.Map[Vertex[A[_]], Int] = mutable.Map[Vertex[A[_]], Int]()
+  override val vertices: mutable.Set[Vertex[A[_]]] = mutable.Set[Vertex[A[_]]]()
+
+  override def addVertex(vertex: Vertex[A[_]]): Unit = {
+    if (!vertices.contains(vertex)) {
+      vertices += vertex
+    }
+  }
+
+  override def inDegree(vertex: Vertex[A[_]]): Int = {
+    vertexInDegree.getOrElse(vertex, -1) match {
+      case -1 => throw new NoSuchElementException(s"$vertex not found in the graph")
+      case x: Int => x
+    }
+  }
+
+  override def outDegree(vertex: Vertex[A[_]]): Int = {
+    adjList.getOrElse(vertex, -1) match {
+      case -1 => throw new NoSuchElementException(s"$vertex not found in the graph")
+      case x: mutable.Set[DirectedEdge[A[_]]] @unchecked => x.size
+    }
+  }
+
+  override def contains(vertex: Vertex[A[_]]): Boolean = vertices.contains(vertex)
+}
+/*
+override val vertices:mutable.Set[Vertex[A[_]]] = mutable.Set[Vertex[A[_]]]()
 
   private val adjList:mutable.Map[
-    Vertex[T], mutable.Set[DirectedEdge[T]]] = mutable.Map[Vertex[T], mutable.Set[DirectedEdge[T]]
+    Vertex[A[_]], mutable.Set[DirectedEdge[A[_]]]] = mutable.Map[Vertex[A[_]], mutable.Set[DirectedEdge[A[_]]]
     ]()
 
-  protected val vertexInDegree:mutable.Map[Vertex[T], Int] = mutable.Map[Vertex[T], Int]()
+  protected val vertexInDegree:mutable.Map[Vertex[A[_]], Int] = mutable.Map[Vertex[A[_]], Int]()
 
-  override def addVertex(vertex: Vertex[T]): Unit = {
+  override def addVertex(vertex: Vertex[A[_]]): Unit = {
     if (!vertices.contains(vertex)) {
       vertices += vertex
     }
   }
 
   @throws(classOf[NoSuchElementException])
-  override def inDegree(vertex: Vertex[T]): Int = {
+  override def inDegree(vertex: Vertex[A[_]]): Int = {
     vertexInDegree.getOrElse(vertex, -1) match {
       case -1 => throw new NoSuchElementException(s"$vertex not found in the graph")
       case x: Int => x
@@ -30,14 +60,14 @@ class DirectedGraph[T] extends Graph[T] {
   }
 
   @throws(classOf[NoSuchElementException])
-  override def outDegree(vertex: Vertex[T]): Int = {
+  override def outDegree(vertex: Vertex[A[_]]): Int = {
     adjList.getOrElse(vertex, -1) match {
       case -1 => throw new NoSuchElementException(s"$vertex not found in the graph")
       case x: mutable.Set[DirectedEdge[T]] @unchecked => x.size
     }
   }
 
-  def addEdge(edge: DirectedEdge[T]): Unit = {
+  def addEdge(edge: DirectedEdge[A[_]]): Unit = {
     if (!vertices.contains(edge.vertex1))
       vertices += edge.vertex1
 
@@ -54,5 +84,5 @@ class DirectedGraph[T] extends Graph[T] {
     adjList.put(edge.vertex1, neighbor)
   }
 
-  override def contains(vertex: Vertex[T]):Boolean = vertices.contains(vertex)
-}
+  def contains(vertex: Vertex[A[_]]):Boolean = vertices.contains(vertex)
+ */

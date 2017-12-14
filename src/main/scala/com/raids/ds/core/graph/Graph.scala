@@ -1,10 +1,10 @@
 package com.raids.ds.core.graph
+import scala.language.higherKinds
 
-
-abstract class Graph[T]{
-  val vertices:collection.mutable.Set[Vertex[T]]
-  def addVertex(vertex: Vertex[T]):Unit
-  def inDegree(vertex: Vertex[T]):Int
-  def outDegree(vertex: Vertex[T]):Int
-  def contains(vertex: Vertex[T]):Boolean
+abstract class Graph[A[B]]{
+  val vertices:collection.mutable.Set[Vertex[A[_]]]
+  def addVertex(vertex: Vertex[A[_]]):Unit
+  def inDegree(vertex: Vertex[A[_]]):Int
+  def outDegree(vertex: Vertex[A[_]]):Int
+  def contains(vertex: Vertex[A[_]]):Boolean
 }

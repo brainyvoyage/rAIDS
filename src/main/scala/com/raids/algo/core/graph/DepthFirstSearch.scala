@@ -1,11 +1,10 @@
 package com.raids.algo.core.graph
 
+import scala.language.higherKinds
 import com.raids.ds.core.graph.{DirectedGraph, Graph, Vertex}
 
-class DepthFirstSearch[T]{
-  private[this] def helper(graph: Graph[T], vertex: Vertex[T], discoveryTime: => Int): Unit ={
-    require(graph.contains(vertex))
-  }
+class DepthFirstSearch[A[B]]{
+  private[this] def helper(graph: Graph[A], vertex: Vertex[_], discoveryTime: => Int): Unit = ???
 
-  def run(graph: Graph[T]):DirectedGraph[T] = ???
+  def run(graph: Graph[A]):DirectedGraph[A] = ???
 }
