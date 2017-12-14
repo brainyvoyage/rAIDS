@@ -9,7 +9,7 @@ package object edge {
   }
 
   trait Undirected extends Direction[Undirected]{
-    override def toString: String = ""
+    override def toString: String = new String(Array[Byte](0xC2.toByte, 0xB7.toByte))
   }
 
   trait Weighted extends Weight[Weighted]{

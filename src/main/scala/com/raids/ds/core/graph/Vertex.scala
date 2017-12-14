@@ -13,14 +13,14 @@ class Vertex[T](val data:T) extends States {
   def discoveryTime_=(value: Int): Unit = _discoveryTime = value
 
   def finishingTime:Int = _finishingTime
-  @throws[IllegalArgumentException]
+  @throws(classOf[IllegalArgumentException])
   def finishingTime_=(value: Int): Unit = {
     require(value >= _discoveryTime)
     _finishingTime = value
   }
 
   def predecessor:Vertex[T] = _predecessor
-  @throws[IllegalArgumentException]
+  @throws(classOf[IllegalArgumentException])
   def predecessor_=(that: Vertex[T]): Unit = {
     require(that.discoveryTime < this._predecessor.discoveryTime)
     _predecessor = that
