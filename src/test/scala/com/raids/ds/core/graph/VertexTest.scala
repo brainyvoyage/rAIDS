@@ -4,13 +4,13 @@ import com.raids.Data
 import org.scalatest.{FlatSpec, Matchers}
 
 class VertexTest extends FlatSpec with Matchers {
-  val stringVertex:Vertex[String] = new Vertex[String](new Data[String]("Initial Value"))
-  val intVertex:Vertex[Int] = new Vertex[Int](new Data[Int](3))
-  val floatVertex:Vertex[Float] = new Vertex[Float](new Data[Float](3.14f))
-  val predecessor:Vertex[String] = new Vertex[String](new Data[String]("predecessor"))
+  val stringVertex = new Vertex(new Data[String]("Initial Value"))
+  val intVertex = new Vertex(new Data[Int](3))
+  val floatVertex = new Vertex(new Data[Float](3.14f))
+  val predecessor = new Vertex(new Data[String]("predecessor"))
 
   "A vertex instantiated with String type" should "have data type of string" in {
-    stringVertex.data.isInstanceOf[Data[String]] should be (true)
+    stringVertex.data.isInstanceOf[Data[_]] should be (true)
   }
   it should "have value equals to the initial passed value" in {
     stringVertex.data.data should be ("Initial Value")
