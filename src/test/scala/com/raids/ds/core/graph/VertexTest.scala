@@ -1,20 +1,21 @@
 package com.raids.ds.core.graph
 
+import com.raids.Data
 import org.scalatest.{FlatSpec, Matchers}
 
 class VertexTest extends FlatSpec with Matchers {
-  val stringVertex:Vertex[String] = new Vertex[String]("Initial Value")
-  val intVertex:Vertex[Int] = new Vertex[Int](3)
-  val floatVertex:Vertex[Float] = new Vertex[Float](3.14f)
-  val predecessor:Vertex[String] = new Vertex[String]("predecessor")
+  val stringVertex:Vertex[String] = new Vertex[String](new Data[String]("Initial Value"))
+  val intVertex:Vertex[Int] = new Vertex[Int](new Data[Int](3))
+  val floatVertex:Vertex[Float] = new Vertex[Float](new Data[Float](3.14f))
+  val predecessor:Vertex[String] = new Vertex[String](new Data[String]("predecessor"))
 
   "A vertex instantiated with String type" should "have data type of string" in {
-    stringVertex.data.isInstanceOf[String] should be (true)
+    stringVertex.data.isInstanceOf[Data[String]] should be (true)
   }
   it should "have value equals to the initial passed value" in {
-    stringVertex.data should be ("Initial Value")
-    intVertex.data should be (3)
-    floatVertex.data should be (3.14f)
+    stringVertex.data.data should be ("Initial Value")
+    intVertex.data.data should be (3)
+    floatVertex.data.data should be (3.14f)
   }
   it should "have be in an un-discovered state" in {
     stringVertex.state should be (stringVertex.unDiscovered)
